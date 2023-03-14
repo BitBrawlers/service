@@ -1,23 +1,41 @@
 package ro.bitbrawlers.parking.data;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.mongodb.repository.Query;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import ro.bitbrawlers.parking.entity.ParkingSpot;
 
 import java.util.List;
 
 
 @Repository
-public interface ParkingSpotRepository extends MongoRepository<ParkingSpotEntity, Integer> {
+public interface ParkingSpotRepository extends JpaRepository<ParkingSpot, Integer> {
 
-    List<ParkingSpotEntity> findAll ();
+    /*
+    @Query()
+    List<ParkingSpot> findAll();
 
-    @Query(value = "{\"_id\": ?0}")
-    ParkingSpotEntity findSpotById (Integer id);
 
-    @Query(value = "{}",count = true)
+    @Query(value = "")
+    ParkingSpot findSpotById (Integer id);
+
+    @Query(value = "")
     Integer totalSpots();
-    @Query(value = "{\"person\": null}",count = true)
+
+    @Query(value = "")
     Integer countEmptySpots();
+    //Integer countByReservation();
+
+    //Integer countByReservationNull();
+
+
+     */
+    //@Query(value = "select count(*) from parkingSpot where reservationID is null ",nativeQuery = true)
+
+    //List<ParkingSpot> findAll();
+    Integer countByReservationNull(); //count empty spots
+
+    Integer countBy();
 
 }

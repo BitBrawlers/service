@@ -1,16 +1,32 @@
-package ro.bitbrawlers.parking.data;
+package ro.bitbrawlers.parking.entity;
 
-public class Person {
+
+import javax.persistence.*;
+
+@Entity()
+@Table(name = "reservation")
+public class Reservation {
+    @Id
+    @Column
     public Integer id;
+
+    @Column
     public String firstName;
+
+    @Column
     public String lastName;
 
-    public Person() {
+    @Column
+    public String licensePlate;
+
+    public Reservation() {
     }
-    public Person(Integer id, String firstName, String lastName) {
+
+    public Reservation(Integer id, String firstName, String lastName, String licensePlate) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.licensePlate = licensePlate;
     }
 
     public Integer getId() {
@@ -35,5 +51,13 @@ public class Person {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getLicensePlate() {
+        return licensePlate;
+    }
+
+    public void setLicensePlate(String licensePlate) {
+        this.licensePlate = licensePlate;
     }
 }
