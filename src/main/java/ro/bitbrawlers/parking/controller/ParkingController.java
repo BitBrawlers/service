@@ -49,4 +49,14 @@ public class ParkingController {
         return parkingSpotService.findById(id);
     }
 
+    @GetMapping("/delete-reservation/{licensePlate}")
+    @ResponseBody
+    public String deleteReservation(@PathVariable String licensePlate) {
+        int updatedRows=parkingSpotService.deleteReservation(licensePlate);
+        if(updatedRows > 0)
+            return String.format("The reservation for %s was removed successfully.", licensePlate);
+        else
+            return String.format("There is no reservation for %s.", licensePlate);
+
+    }
 }
