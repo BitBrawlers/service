@@ -7,11 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import ro.bitbrawlers.parking.data.ParkingSpotEntity;
+import ro.bitbrawlers.parking.entity.ParkingSpot;
 import ro.bitbrawlers.parking.dto.CountDto;
 import ro.bitbrawlers.parking.service.ParkingSpotService;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin
 @Controller
@@ -20,22 +21,32 @@ public class ParkingController {
     @Autowired
     private ParkingSpotService parkingSpotService;
 
+    /*
     @GetMapping("/spots")
     @ResponseBody
-    public List<ParkingSpotEntity> findAll() {
+    public List<ParkingSpot> findAll() {
         return parkingSpotService.findAll();
+    }
+
+
+    */
+
+    @GetMapping("/count")
+    @ResponseBody
+    public CountDto countByReservationNull(){
+        return parkingSpotService.countSpots();
+    }
+
+    @GetMapping("/spots")
+    @ResponseBody
+    public List<ParkingSpot> findBy(){
+        return parkingSpotService.findBy();
     }
 
     @GetMapping("/spots/{id}")
     @ResponseBody
-    public ParkingSpotEntity findSpotById(@PathVariable Integer id) {
-        return parkingSpotService.findSpotById(id);
-    }
-
-    @GetMapping("/count")
-    @ResponseBody
-    public CountDto countEmptySpots() {
-        return parkingSpotService.countSpots();
+    public Optional<ParkingSpot> findById(@PathVariable Integer id) {
+        return parkingSpotService.findById(id);
     }
 
 }
