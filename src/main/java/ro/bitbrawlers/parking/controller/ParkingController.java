@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import ro.bitbrawlers.parking.entity.ParkingSpot;
 import ro.bitbrawlers.parking.dto.CountDto;
+import ro.bitbrawlers.parking.dto.ReservationCredentials;
 import ro.bitbrawlers.parking.service.ParkingSpotService;
 
 import java.util.List;
@@ -59,4 +60,15 @@ public class ParkingController {
             return String.format("There is no reservation for %s.", licensePlate);
 
     }
+
+    @PostMapping("/add-reservation")
+    @ResponseBody
+    public String addReservation(@RequestBody ReservationCredentials reservationCredentials){
+        if (parkingSpotService.addReservation(reservationCredentials) == true)    
+            return "The reservation was made successfully";
+        else    
+            return "There is no empty spot.";
+        
+    }
+
 }
