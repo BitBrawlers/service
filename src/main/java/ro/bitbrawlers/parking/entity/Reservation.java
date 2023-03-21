@@ -1,10 +1,19 @@
 package ro.bitbrawlers.parking.entity;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 
-@Entity()
+@Entity
 @Table(name = "reservation")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Reservation {
     @Id
     @Column
@@ -19,45 +28,4 @@ public class Reservation {
     @Column
     public String licensePlate;
 
-    public Reservation() {
-    }
-
-    public Reservation(Integer id, String firstName, String lastName, String licensePlate) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.licensePlate = licensePlate;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getLicensePlate() {
-        return licensePlate;
-    }
-
-    public void setLicensePlate(String licensePlate) {
-        this.licensePlate = licensePlate;
-    }
 }

@@ -3,7 +3,6 @@ package ro.bitbrawlers.parking.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ro.bitbrawlers.parking.repository.ReservationRepository;
-import ro.bitbrawlers.parking.dto.ReservationCredentialsDTO;
 import ro.bitbrawlers.parking.entity.ParkingSpot;
 import ro.bitbrawlers.parking.repository.ParkingSpotRepository;
 import ro.bitbrawlers.parking.dto.CountDto;
@@ -16,10 +15,7 @@ public class ParkingSpotService {
     @Autowired
     private ParkingSpotRepository parkingSpotRepository;
 
-    @Autowired
-    private ReservationRepository reservationRepository;
-
-    public List<ParkingSpot> findBy() {
+    public List<ParkingSpot> findAll() {
         return parkingSpotRepository.findAll();
     }
 
@@ -35,10 +31,5 @@ public class ParkingSpotService {
         parkingSpotRepository.deleteReservation(licensePlate);
         return updatedRows;
     }
-
-    /*public ReservationCredentialsDTO addReservation (ReservationCredentialsDTO reservationCredentialsDTO) {
-        return reservationCredentialsDTO;
-
-    }*/
 
 }

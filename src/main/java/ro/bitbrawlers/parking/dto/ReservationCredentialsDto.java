@@ -9,7 +9,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CountDto {
-    private Integer emptySpotCount;
-    private Integer totalSpotCount;
+public class ReservationCredentialsDto {
+    private String firstName;
+    private String lastName;
+    private String licensePlate;
 }
