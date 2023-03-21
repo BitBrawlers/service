@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import ro.bitbrawlers.parking.dto.ReservationCredentialsDTO;
+import ro.bitbrawlers.parking.dto.ReservationCredentialsDto;
 import ro.bitbrawlers.parking.entity.ParkingSpot;
 import ro.bitbrawlers.parking.dto.CountDto;
 import ro.bitbrawlers.parking.repository.ParkingSpotRepository;
@@ -31,20 +31,19 @@ public class ParkingController {
 
     @GetMapping("/count")
     @ResponseBody
-    public CountDto countByReservationNull(){
+    public CountDto countSpots(){
         return parkingSpotService.countSpots();
     }
 
     @GetMapping("/spots")
     @ResponseBody
-    public List<ParkingSpot> findBy(){
-        return parkingSpotService.findBy();
+    public List<ParkingSpot> findAll(){
+        return parkingSpotService.findAll();
     }
 
     @GetMapping("/spots/{id}")
     public ResponseEntity<Optional<ParkingSpot>> findById(@PathVariable Integer id) {
         Optional<ParkingSpot> parkingSpot = parkingSpotService.findById(id);
-        System.out.println(parkingSpot);
         if(!parkingSpot.isPresent())
             return new ResponseEntity<>(parkingSpot,HttpStatus.BAD_REQUEST);
         return new ResponseEntity<>(parkingSpot,HttpStatus.OK);
@@ -60,17 +59,17 @@ public class ParkingController {
     }
 
     @PostMapping("/add-reservation")
-    public ResponseEntity<String> addReservation(@RequestBody ReservationCredentialsDTO reservationCredentialsDTO) {
+    public ResponseEntity<String> addReservation(@RequestBody ReservationCredentialsDto reservationCredentialsDto) {
         if(parkingSpotRepository.countByReservationNull() == 0)
             return new ResponseEntity<>("Parking is already full.",HttpStatus.BAD_REQUEST);
 
-        else if(parkingSpotRepository.countByReservationNull() > 0 && reservationRepository.countByLicensePlate(reservationCredentialsDTO.getLicensePlate()) > 0)
-            return new ResponseEntity<>(String.format("There is already a car with the license plate %s.", reservationCredentialsDTO.getLicensePlate()),HttpStatus.BAD_REQUEST);
+        else if(parkingSpotRepository.countByReservationNull() > 0 && reservationRepository.countByLicensePlate(reservationCredentialsDto.getLicensePlate()) > 0)
+            return new ResponseEntity<>(String.format("There is already a car with the license plate %s.", reservationCredentialsDto.getLicensePlate()),HttpStatus.BAD_REQUEST);
 
         else {
-            parkingSpotRepository.addReservation(reservationCredentialsDTO.getFirstName(), reservationCredentialsDTO.getLastName(), reservationCredentialsDTO.getLicensePlate());
-            parkingSpotRepository.updateParkingSpotRow(reservationCredentialsDTO.getLicensePlate());
-            return new ResponseEntity<>(String.format("The reservation for the car with the license plate %s was made successfully.", reservationCredentialsDTO.getLicensePlate()),HttpStatus.OK);
+            parkingSpotRepository.addReservation(reservationCredentialsDto.getFirstName(), reservationCredentialsDto.getLastName(), reservationCredentialsDto.getLicensePlate());
+            parkingSpotRepository.updateParkingSpotRow(reservationCredentialsDto.getLicensePlate());
+            return new ResponseEntity<>(String.format("The reservation for the car with the license plate %s was made successfully.", reservationCredentialsDto.getLicensePlate()),HttpStatus.OK);
         }
     }
 }

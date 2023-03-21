@@ -1,9 +1,18 @@
 package ro.bitbrawlers.parking.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 
-@Entity()
+@Entity
 @Table(name = "parkingSpot")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class ParkingSpot {
     @Id
     @Column
@@ -12,29 +21,5 @@ public class ParkingSpot {
     @OneToOne
     @JoinColumn(name = "reservationID",referencedColumnName = "id")
     public Reservation reservation;
-
-    public ParkingSpot() {
-    }
-
-    public ParkingSpot(Integer id, Reservation reservation) {
-        this.id = id;
-        this.reservation = reservation;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Reservation getReservation() {
-        return reservation;
-    }
-
-    public void setReservation(Reservation reservation) {
-        this.reservation = reservation;
-    }
 
 }
