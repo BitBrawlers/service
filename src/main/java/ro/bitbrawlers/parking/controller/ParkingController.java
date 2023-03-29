@@ -5,10 +5,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
+import ro.bitbrawlers.parking.dto.CountDto;
 import ro.bitbrawlers.parking.dto.ReservationCredentialsDto;
 import ro.bitbrawlers.parking.entity.ParkingSpot;
-import ro.bitbrawlers.parking.dto.CountDto;
 import ro.bitbrawlers.parking.repository.ParkingSpotRepository;
 import ro.bitbrawlers.parking.repository.ReservationRepository;
 import ro.bitbrawlers.parking.service.ParkingSpotService;

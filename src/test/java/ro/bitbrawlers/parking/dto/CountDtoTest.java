@@ -1,8 +1,7 @@
-package ro.britbrawlers.parking.dto;
+package ro.bitbrawlers.parking.dto;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import ro.bitbrawlers.parking.dto.CountDto;
 
 public class CountDtoTest {
 
