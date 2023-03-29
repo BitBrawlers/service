@@ -32,8 +32,7 @@ public class ParkingSpotServiceTestIT {
 
     @Test
     public void test_findById_returnsEmpty() {
-        CountDto countDto = parkingSpotService.countSpots();
-        Integer id = countDto.getTotalSpotCount() + 1;
+        Integer id = parkingSpotRepository.countBy() + 1;
         assertEquals(Optional.empty(), parkingSpotService.findById(id));
     }
 
