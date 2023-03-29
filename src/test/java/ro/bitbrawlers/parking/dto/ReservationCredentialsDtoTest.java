@@ -1,8 +1,8 @@
-package ro.britbrawlers.parking.dto;
+package ro.bitbrawlers.parking.dto;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import ro.bitbrawlers.parking.dto.ReservationCredentialsDto;
+
 public class ReservationCredentialsDtoTest  {
     ReservationCredentialsDto reservationCredentialsDto = new ReservationCredentialsDto("Marian", "Halasag", "GL23VHA");
     ReservationCredentialsDto reservationCredentialsDtoEmpty = new ReservationCredentialsDto();
