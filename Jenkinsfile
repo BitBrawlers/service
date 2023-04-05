@@ -2,6 +2,7 @@ pipeline {
     agent any
     environment {
         DOCKER_PASSWORD = credentials("docker_password")
+	DOCKER_USERNAME = credentials("docker_username")
     }
 
     stages {
@@ -14,12 +15,11 @@ pipeline {
 		stage('Tag image') {
         	steps {
         		script {
-            		GIT_TAG = sh([script: 'git fetch --tag && git tag', returnStdout: true]).trim()
-            		MAJOR_VERSION = sh([script: 'git tag | cut -d . -f 1', returnStdout: true]).trim()
-            		MINOR_VERSION = sh([script: 'git tag | cut -d . -f 2', returnStdout: true]).trim()
-            		PATCH_VERSION = sh([script: 'git tag | cut -d . -f 3', returnStdout: true]).trim()
+            		MAJOR_VERSION = sh([script: 'git describe --tags | cut -d . -f 1', returnStdout: true]).trim()
+            		MINOR_VERSION = sh([script: 'git describe --tags | cut -d . -f 2', returnStdout: true]).trim()
+            		PATCH_VERSION = sh([script: 'git describe --tags | cut -d . -f 3', returnStdout: true]).trim()
 				}
-				sh "docker build -t bitbrawlers/hello-img:${MAJOR_VERSION}.\$((${MINOR_VERSION} + 1)).${PATCH_VERSION} ."
+				sh "docker build -t ${DOCKER_USERNAME}/hello-img:${MAJOR_VERSION}.\$((${MINOR_VERSION} + 1)).${PATCH_VERSION} ."
 			}	
 		}
     }
