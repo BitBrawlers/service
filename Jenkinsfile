@@ -24,10 +24,10 @@ pipeline {
 				}
 				sh "docker build -t ${DOCKER_USERNAME}/hello-img:${MAJOR_VERSION}.\$((${MINOR_VERSION} + 1)).${PATCH_VERSION} ."
 				sh "docker login docker.io -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
-				sh "docker push ${DOCKER_USERNAME}/hello-img:$IMAGE_VERSION"
+				sh "docker push ${DOCKER_USERNAME}/hello-img:${IMAGE_TAG}"
 				
 				sh "git tag ${env.IMAGE_TAG}"
-				sh "git push https://${GITHUB_TOKEN}@github.com/alinaeftn/service.git ${env.IMAGE_TAG}"
+				sh "git push https://${GITHUB_TOKEN}@github.com/bitbrawlers/service.git ${env.IMAGE_TAG}"
 			}	
 		}
     }
