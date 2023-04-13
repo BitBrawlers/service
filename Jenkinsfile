@@ -15,6 +15,7 @@ pipeline {
 
 		stage('Tag image') {
 			steps {
+				"IMAGE_TAG=${env.IMAGE_TAG} docker-compose up -d hello
 				script {
 					sh([script: 'git fetch --tag', returnStdout: true]).trim()
 					env.MAJOR_VERSION = sh([script: 'git tag | sort --version-sort | tail -1 | cut -d . -f 1', returnStdout: true]).trim()
@@ -28,6 +29,7 @@ pipeline {
 				
 				sh "git tag ${env.IMAGE_TAG}"
 				sh "git push https://${GITHUB_TOKEN}@github.com/BitBrawlers/service.git ${env.IMAGE_TAG}"
+				sh "IMAGE_TAG=${env.IMAGE_TAG} docker-compose up -d hello"
 			}	
 		}
     }
