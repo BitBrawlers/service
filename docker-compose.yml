@@ -10,7 +10,7 @@ services:
       ENVIRONMENT_NAME: local
       MONGODB_CONECTION_URL: mongodb://root:example@mongo:27017/
     restart: always
-    container-name: hello
+    container_name: prodeng_hello
   mongo:
     image: mongo:5.0.2
     restart: always
@@ -37,7 +37,7 @@ services:
       - service_prodeng
     environment:
       POSTGRES_PASSWORD: password
-    container-name: postgres
+    container_name: prodeng_postgres
   adminer:
     image: adminer
     restart: always
