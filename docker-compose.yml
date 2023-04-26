@@ -5,12 +5,11 @@ services:
     ports:
       - 8081:8081
     networks:
-      - service_prodeng
+      - service_default
     environment:
       ENVIRONMENT_NAME: local
       MONGODB_CONECTION_URL: mongodb://root:example@mongo:27017/
     restart: always
-    container_name: prodeng_hello
   mongo:
     image: mongo:5.0.2
     restart: always
@@ -33,16 +32,13 @@ services:
     restart: always
     ports:
       - 5431:5432 #default port for postgres is 5432
-    networks:
-      - service_prodeng
     environment:
       POSTGRES_PASSWORD: password
-    container_name: prodeng_postgres
   adminer:
     image: adminer
     restart: always
     ports:
       - 8082:8080
 networks:
-  service_prodeng:
-    name: service_prodeng_net  
+  service_default:
+    external: true 
