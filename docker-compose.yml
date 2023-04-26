@@ -1,7 +1,7 @@
 version: '3.1'
 services:
   hello:
-    image: angel1ionita/hello-img:{IMAGE_TAG}
+    image: angel1ionita/hello-img:${IMAGE_TAG}
     ports:
       - 8081:8081
     networks:
