@@ -1,9 +1,11 @@
 version: '3.1'
 services:
   hello:
-    image: angel1ionita/hello-img:${IMAGE_TAG}
+    image: angel1ionita/hello-img:{IMAGE_TAG}
     ports:
       - 8081:8081
+    networks:
+      - service_prodeng
     environment:
       ENVIRONMENT_NAME: local
       MONGODB_CONECTION_URL: mongodb://root:example@mongo:27017/
@@ -30,6 +32,8 @@ services:
     restart: always
     ports:
       - 5431:5432 #default port for postgres is 5432
+    networks:
+      - service_prodeng
     environment:
       POSTGRES_PASSWORD: password
   adminer:
@@ -37,3 +41,5 @@ services:
     restart: always
     ports:
       - 8082:8080
+networks:
+  service_prodeng: 
