@@ -31,6 +31,12 @@ pipeline {
 				sh "IMAGE_TAG=${env.IMAGE_TAG} docker-compose up -d hello"
 			}	
 		}
+		
+		stage('Integration Tests') {
+			steps {
+				sh './gradlew testIT'
+			}
+		}
     }
 }
 
